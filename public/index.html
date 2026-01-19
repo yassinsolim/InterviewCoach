@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InterviewCoach</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="glow"></div>
+    <header class="hero">
+      <div class="brand">InterviewCoach</div>
+      <h1>Practice interviews that feel real, not rehearsed.</h1>
+      <p>
+        Feed the job description, choose behavioral or technical mode, and get a
+        tailored interview flow with live feedback.
+      </p>
+    </header>
+
+    <main class="grid">
+      <section class="panel setup" data-reveal>
+        <h2>Session setup</h2>
+        <label class="field">
+          <span>Job description</span>
+          <textarea
+            id="jobDescription"
+            placeholder="Paste the job description or role summary..."
+            rows="7"
+          ></textarea>
+        </label>
+
+        <label class="field">
+          <span>Resume</span>
+          <textarea
+            id="resume"
+            placeholder="Paste your resume or key bullet points..."
+            rows="6"
+          ></textarea>
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Target role</span>
+            <input
+              id="targetRole"
+              type="text"
+              placeholder="Product Manager, Backend Engineer, Designer..."
+            />
+          </label>
+          <label class="field">
+            <span>Experience level</span>
+            <select id="experienceLevel">
+              <option value="Junior">Junior</option>
+              <option value="Mid">Mid</option>
+              <option value="Senior" selected>Senior</option>
+              <option value="Lead">Lead</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="field">
+          <span>Interview mode</span>
+          <div class="toggle-group" role="radiogroup" aria-label="Interview mode">
+            <button type="button" class="toggle active" data-mode="behavioral">
+              Behavioral
+            </button>
+            <button type="button" class="toggle" data-mode="technical">
+              Technical
+            </button>
+            <button type="button" class="toggle" data-mode="both">
+              Both
+            </button>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Focus areas (comma separated)</span>
+          <input
+            id="focusAreas"
+            type="text"
+            placeholder="Leadership, system design, stakeholder management"
+          />
+        </label>
+
+        <label class="field">
+          <span>Questions per session</span>
+          <input id="questionCount" type="number" min="1" max="10" value="5" />
+        </label>
+
+        <div class="actions">
+          <button id="startSession" class="primary">Start session</button>
+          <button id="resetSession" class="ghost">Reset</button>
+        </div>
+
+        <div class="status" id="sessionStatus">
+          Waiting for setup.
+        </div>
+      </section>
+
+      <section class="panel chat" data-reveal>
+        <div class="chat-header">
+          <div>
+            <h2>Interview room</h2>
+            <p id="modelStatus">Model: --</p>
+          </div>
+          <button id="endSession" class="ghost">End</button>
+        </div>
+
+        <div class="chat-log" id="chatLog">
+          <div class="message system">
+            Add your job description to begin.
+          </div>
+        </div>
+
+        <div class="composer">
+          <textarea
+            id="userAnswer"
+            placeholder="Type your answer here..."
+            rows="3"
+          ></textarea>
+          <button id="sendAnswer" class="primary">Send</button>
+        </div>
+      </section>
+    </main>
+
+    <section class="panel how" data-reveal>
+      <h2>How it works</h2>
+      <div class="how-grid">
+        <div>
+          <h3>LLM</h3>
+          <p>
+            Gemini 2.0 Flash generates interviewer questions and feedback based
+            on the job description, resume, mode, and your answers.
+          </p>
+        </div>
+        <div>
+          <h3>RAG</h3>
+          <p>
+            A lightweight local knowledge base adds targeted prompts and rubrics
+            pulled by keyword matching from your job description and focus
+            areas. No external vector DB required.
+          </p>
+        </div>
+        <div>
+          <h3>Memory</h3>
+          <p>
+            The last 12 turns and the job description are sent each round to
+            keep context coherent without ballooning tokens.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal" id="keyModal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true">
+        <h2>Enter Gemini API key</h2>
+        <p>
+          Your key is stored in memory for this session and used to call Gemini.
+        </p>
+        <input
+          id="apiKeyInput"
+          type="password"
+          placeholder="AIza..."
+          autocomplete="off"
+        />
+        <div class="actions">
+          <button id="saveKey" class="primary">Save key</button>
+        </div>
+        <div class="status" id="keyStatus"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
