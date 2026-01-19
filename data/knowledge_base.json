@@ -1,0 +1,38 @@
+[
+  {
+    "id": "behavioral-collaboration",
+    "modes": ["behavioral", "both"],
+    "keywords": ["collaboration", "team", "stakeholder", "conflict", "communication"],
+    "snippet": "Probe for a specific collaboration story with clear roles, actions, and outcome. Ask for how they handled conflict and aligned stakeholders."
+  },
+  {
+    "id": "behavioral-ownership",
+    "modes": ["behavioral", "both"],
+    "keywords": ["ownership", "leadership", "initiative", "drive", "impact"],
+    "snippet": "Ask for an example where they took ownership end to end, highlighting tradeoffs, decisions, and measurable impact."
+  },
+  {
+    "id": "behavioral-learning",
+    "modes": ["behavioral", "both"],
+    "keywords": ["failure", "mistake", "learning", "growth", "feedback"],
+    "snippet": "Use STAR and focus on what changed after the mistake, how they incorporated feedback, and how outcomes improved."
+  },
+  {
+    "id": "technical-system-design",
+    "modes": ["technical", "both"],
+    "keywords": ["system", "architecture", "scalability", "design", "latency", "throughput"],
+    "snippet": "Ask for a high level system design with requirements, key components, data flow, scaling strategy, and tradeoffs."
+  },
+  {
+    "id": "technical-coding",
+    "modes": ["technical", "both"],
+    "keywords": ["algorithm", "data", "structure", "complexity", "coding", "implementation"],
+    "snippet": "Include a coding style prompt that checks approach, complexity, edge cases, and testing strategy."
+  },
+  {
+    "id": "technical-debugging",
+    "modes": ["technical", "both"],
+    "keywords": ["debug", "incident", "root", "cause", "observability", "monitoring"],
+    "snippet": "Focus on diagnosing an issue with logs and metrics, isolating root cause, and preventing recurrence."
+  }
+]
