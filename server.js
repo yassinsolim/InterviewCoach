@@ -8,6 +8,19 @@ app.use(express.json({ limit: "1mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 let apiKey = process.env.GEMINI_API_KEY || "";
+
+const API_ADMIN_KEY = process.env.API_ADMIN_KEY || "";
+
+function requireAdminKey(req, res, next) {
+  if (!API_ADMIN_KEY) {
+    return res.status(503).json({ error: "Server misconfigured: API_ADMIN_KEY not set" });
+  }
+  const provided = req.headers["x-admin-key"] || (req.body && req.body.adminKey);
+  if (!provided || provided !== API_ADMIN_KEY) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  next();
+}
 let activeModel = process.env.GEMINI_MODEL || "gemini-2.0-flash";
 let langchainModulesPromise = null;
 
@@ -191,7 +204,7 @@ app.get("/api/status", (req, res) => {
   });
 });
 
-app.post("/api/key", (req, res) => {
+app.post("/api/key", requireAdminKey, (req, res) => {
   const submitted = String(req.body?.apiKey || "").trim();
   if (!submitted) {
     return res.status(400).json({ error: "API key is required." });
@@ -200,7 +213,7 @@ app.post("/api/key", (req, res) => {
   return res.json({ ok: true });
 });
 
-app.delete("/api/key", (req, res) => {
+app.delete("/api/key", requireAdminKey, (req, res) => {
   apiKey = "";
   res.json({ ok: true });
 });
