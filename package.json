@@ -8,8 +8,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@langchain/core": "^1.1.15",
-    "@langchain/google-genai": "^2.1.10",
+    "@langchain/core": "^1.5.1",
+    "@langchain/google-genai": "^2.3.7",
     "express": "^4.19.2"
   }
 }
